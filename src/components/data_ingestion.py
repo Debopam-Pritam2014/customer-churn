@@ -5,6 +5,7 @@ from dataclasses import dataclass
 from sklearn.model_selection import train_test_split
 from src.exception_handler import CustomException
 from src.logger import logging
+from src.components.data_validation import DataValidation,DataValidationConfig
 
 
 @dataclass
@@ -43,5 +44,7 @@ class DataIngestion:
 
 if __name__ == "__main__":
     data_ingestion = DataIngestion()
-    data_ingestion.initiate_data_ingestion()
+    train_data_path,test_data_path=data_ingestion.initiate_data_ingestion()
     print("Data Ingestion Successful")
+    data_validation=DataValidation()
+    data_validation.initiate_data_validation(train_data_path=train_data_path,test_data_path=test_data_path)
