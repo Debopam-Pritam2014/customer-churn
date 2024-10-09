@@ -6,8 +6,8 @@ import pandas as pd
 
 @dataclass
 class DataValidationConfig:
-    validated_train_data_path:str=os.path.join('data_validation','train_data.csv')
-    validated_test_data_path:str=os.path.join('data_validation','test_data.csv')
+    validated_train_data_path : str= os.path.join('data_validation','data_train.csv')
+    validated_test_data_path : str= os.path.join('data_validation','data_test.csv')
 
 class DataValidation:
     def __init__(self):
@@ -18,8 +18,7 @@ class DataValidation:
         try:
             train_data=pd.read_csv(train_data_path)
             test_data=pd.read_csv(test_data_path)
-            os.makedirs(self.data_validation_config.validated_train_data_path,exist_ok=True)
-            os.makedirs(self.data_validation_config.validated_test_data_path,exist_ok=True)
+            os.makedirs(os.path.dirname(self.data_validation_config.validated_train_data_path),exist_ok=True)
             expected_types={
                 "Age":pd.api.types.is_float_dtype,
                 "Gender":pd.api.types.is_object_dtype,
@@ -40,8 +39,8 @@ class DataValidation:
                     raise CustomException(e,sys)
             
             logging.info("Data Validation Successful.")
-            train_data.to_csv(self.data_validation_config.validated_train_data_path,index=False)
-            test_data.to_csv(self.data_validation_config.validated_test_data_path,index=False)
+            train_data.to_csv(self.data_validation_config.validated_train_data_path,index=False,header=True)
+            test_data.to_csv(self.data_validation_config.validated_test_data_path,index=False,header=True)
             logging.info("Validated Data Saved Successfully.")
             return(
                 self.data_validation_config.validated_train_data_path,
@@ -50,4 +49,6 @@ class DataValidation:
 
         except Exception as e:
             raise CustomException(e,sys)
+        
+
         
