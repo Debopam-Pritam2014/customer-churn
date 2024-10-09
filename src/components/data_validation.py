@@ -39,6 +39,8 @@ class DataValidation:
                     raise CustomException(e,sys)
             
             logging.info("Data Validation Successful.")
+            # dropping the null values
+            train_data.dropna(inplace=True)
             train_data.to_csv(self.data_validation_config.validated_train_data_path,index=False,header=True)
             test_data.to_csv(self.data_validation_config.validated_test_data_path,index=False,header=True)
             logging.info("Validated Data Saved Successfully.")
