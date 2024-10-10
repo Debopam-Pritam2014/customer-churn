@@ -7,6 +7,7 @@ from src.exception_handler import CustomException
 from src.logger import logging
 from src.components.data_validation import DataValidation,DataValidationConfig
 from src.components.data_transformation import DataTransformation,DataTransformationConfig
+from src.components.model_trainer import ModelTrainer,ModelTrainerConfig
 
 
 @dataclass
@@ -50,5 +51,9 @@ if __name__ == "__main__":
     data_validation=DataValidation()
     validated_train_data_path,validated_test_data_path=data_validation.initiate_data_validation(train_data_path=train_data_path,test_data_path=test_data_path)
     dt=DataTransformation()
-    dt.initiate_data_transformation(validated_train_data_path=validated_train_data_path,validated_test_data_path=validated_test_data_path)
+    X_train,y_train,X_test,y_test=dt.initiate_data_transformation(validated_train_data_path=validated_train_data_path,validated_test_data_path=validated_test_data_path)
     print('Data transformation successful')
+    trainer=ModelTrainer()
+    trainer.initiate_model_training(X_train=X_train,y_train=y_train,X_test=X_test,y_test=y_test)
+    print("Model training successful.")
+
