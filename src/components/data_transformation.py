@@ -20,8 +20,8 @@ class DataTransformation:
 
     def _get_preprocessor_object(self):
         try:
-            numerical_columns=["Age","Tenure","Usage Frequency", "Support Calls"]
-            categorical_columns=["Subscription Type","Contract Length"]
+            numerical_columns=["Age","Tenure","Usage Frequency", "Support Calls","Payment Delay","Total Spend","Last Interaction"]
+            categorical_columns=["Gender","Subscription Type","Contract Length"]
             numerical_transformer=Pipeline(
                 steps=[
                     ('imputer',SimpleImputer(strategy='mean')),
