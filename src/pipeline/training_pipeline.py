@@ -13,8 +13,8 @@ class TrainingPipeline:
     def initiate_training_pipeline(self):
         logging.info("Training Pipeline Invoked.")
         try:
-            data_ingesion=DataIngestion()
             print("Data Ingestion Started...")
+            data_ingesion=DataIngestion()
             train_data_path,test_data_path=data_ingesion.initiate_data_ingestion()
             print("Data Ingestion Done.")
 
@@ -33,7 +33,7 @@ class TrainingPipeline:
             trainer.initiate_model_training(X_train=X_train,y_train=y_train,X_test=X_test,y_test=y_test)
 
             logging.info("Training Pipeline Successfully Done.")
-            print("Training Pipeline Successfully Done.")
+            print("Model Training Done.")
         except Exception as e:
             raise CustomException(e,sys)
 
