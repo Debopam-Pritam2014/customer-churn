@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div class="login">
+        <h1>Telco Churn Prediction Using ML</h1>
+
+        <form action="{{ url_for('predict_data')}}" method="post">
+            <h1>
+                <legend>Churn Prediction</legend>
+            </h1>
+            <div class="mb-3">
+                <label class="form-label">Age</label>
+                <input class="form-control" type="number" name="age" placeholder="Enter your Age" min='0' max='100' />
+            </div>
+            <div class="mb-3">
+                <label class="form-label">Gender</label>
+                <select class="form-control" name="gender" placeholder="Enter you Gender" required>
+                    <option class="placeholder" selected disabled value="">Select your Gender</option>
+                    <option value="Male">
+                        Male
+                    </option>
+                    <option value="Female">
+                        Female
+                    </option>
+                </select>
+            </div>
+            <div class="mb-3">
+                <label class="form-label">Tenure</label>
+                <input class="form-control" type="number" name="tenure" placeholder="Enter Tenure" min='1' max='30.0' />
+            </div>
+            <div class="mb-3">
+                <label class="form-label">Usage Frequency</label>
+                <input class="form-control" type="number" name="usage_frequency" placeholder="Usage Frequency" min='1' max='30.0' />
+            </div>
+            <div class="mb-3">
+                <label class="form-label">Support Calls</label>
+                <input class="form-control" type="number" name="support_calls" placeholder="Support Calls" min='1' max='30.0' />
+            </div>
+            <div class="mb-3">
+                <label class="form-label">Payment Delay</label>
+                <input class="form-control" type="number" name="payment_delay" placeholder="Payment Delay" min='1' max='30.0' />
+            </div>
+                
+            <div class="mb-3">
+                <label class="form-label">Subscription Type</label>
+                <select class="form-control" name="subscription_type" placeholder="Enter Subscription Type"
+                    required>
+                    <option class="placeholder" selected disabled value="">Select Subscription Type</option>
+                    <option value="Basic">
+                        Basic
+                    </option>
+                    <option value="Premium">
+                        Premium
+                    </option>
+                    <option value="Standard">
+                        Standard
+                    </option>
+                </select>
+            </div>
+            <div class="mb-3">
+                <label class="form-label">Contract Length</label>
+                <select class="form-control" name="contract_length" placeholder="Enter contract length" required>
+                    <option class="placeholder" selected disabled value="">Select Contract Length</option>
+                    <option value="Annual">
+                        Annual
+                    </option>
+                    <option value="Quarterly">
+                        Quarterly
+                    </option>
+                    <option value="Monthly">
+                        Monthly
+                    </option>
+                </select>
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label">Total Spend</label>
+                <input class="form-control" type="number" name="total_spend" placeholder="Enter total spend"
+                    min='90' max='1000' />
+            </div>
+            <div class="mb-3">
+                <label class="form-label">Last Interaction</label>
+                <input class="form-control" type="number" name="last_interaction" placeholder="Enter last interaction"
+                    min='0' max='30' />
+            </div>
+            <div class="mb-3">
+                <input class="btn btn-primary" type="submit" value="Predict Churn" required />
+            </div>
+        </form>
+        <h2>
+            The prediction is {{results}}
+        </h2>
+
+        <body>
+</html>

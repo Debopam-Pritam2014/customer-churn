@@ -55,8 +55,8 @@ class DataTransformation:
             train_data=pd.read_csv(validated_train_data_path)
             test_data=pd.read_csv(validated_test_data_path)
             target_column="Churn"
-            train_data[target_column].astype("int")
-            test_data[target_column].astype("int")
+            train_data[target_column]=train_data[target_column].astype("int")
+            test_data[target_column]=test_data[target_column].astype("int")
             X_train=train_data.drop(columns=[target_column],axis=1)
             y_train=train_data[target_column]
             X_test=test_data.drop(columns=[target_column])
