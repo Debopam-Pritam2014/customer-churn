@@ -24,7 +24,7 @@ class DataIngestion:
     def initiate_data_ingestion(self):
         logging.info("Initiate Data Ingestion.")
         try:
-            dataset = pd.read_csv("data\customer_churn_dataset-training-master.csv")
+            dataset = pd.read_csv("data\credit-card-customer-churn.csv")
             # Create directories recursively
             os.makedirs(os.path.dirname(self.data_ingestion_config.raw_data_path), exist_ok=True)
             
