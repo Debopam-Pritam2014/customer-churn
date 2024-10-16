@@ -20,17 +20,18 @@ class DataValidation:
             test_data=pd.read_csv(test_data_path)
             os.makedirs(os.path.dirname(self.data_validation_config.validated_train_data_path),exist_ok=True)
             expected_types={
-                "Age":pd.api.types.is_float_dtype,
+                "Surname":pd.api.types.is_object_dtype,
+                "CreditScore":pd.api.types.is_numeric_dtype,
+                "Geography":pd.api.types.is_object_dtype,
                 "Gender":pd.api.types.is_object_dtype,
-                "Tenure":pd.api.types.is_float_dtype,
-                "Usage Frequency":pd.api.types.is_float_dtype,
-                "Support Calls":pd.api.types.is_float_dtype,
-                "Payment Delay":pd.api.types.is_float_dtype,
-                "Subscription Type":pd.api.types.is_object_dtype,
-                "Contract Length":pd.api.types.is_object_dtype,
-                "Total Spend":pd.api.types.is_float_dtype,
-                "Last Interaction":pd.api.types.is_float_dtype,
-                "Churn":pd.api.types.is_float_dtype,
+                "Age":pd.api.types.is_numeric_dtype,
+                "Tenure":pd.api.types.is_numeric_dtype,
+                "Balance":pd.api.types.is_numeric_dtype,
+                "NumOfProducts":pd.api.types.is_numeric_dtype,
+                "HasCrCard":pd.api.types.is_numeric_dtype,
+                "IsActiveMember":pd.api.types.is_numeric_dtype,
+                "EstimatedSalary":pd.api.types.is_numeric_dtype,
+                "Exited":pd.api.types.is_numeric_dtype,
             }
             for column,dtypes in expected_types.items():
                 if not dtypes(train_data[column]):
@@ -41,8 +42,6 @@ class DataValidation:
             logging.info("Data Validation Successful.")
             # dropping the null values
             train_data.dropna(inplace=True)
-            train_data['Churn']=train_data['Churn'].astype('int')
-            test_data['Churn']=test_data['Churn'].astype('int')
             train_data.to_csv(self.data_validation_config.validated_train_data_path,index=False,header=True)
             test_data.to_csv(self.data_validation_config.validated_test_data_path,index=False,header=True)
             logging.info("Validated Data Saved Successfully.")

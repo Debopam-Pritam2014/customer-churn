@@ -30,9 +30,8 @@ class DataIngestion:
             
             train_data, test_data = train_test_split(dataset, test_size=0.2, random_state=1)
             logging.info("Saving train and test data to artifacts.")
+            dataset.drop(columns=['RowNumber','CustomerId'],inplace=True)
             dataset.to_csv(self.data_ingestion_config.raw_data_path, index=False, header=True)
-            train_data.drop(columns=['CustomerID'],inplace=True)
-            test_data.drop(columns=['CustomerID'],inplace=True)
             train_data.to_csv(self.data_ingestion_config.train_data_path, index=False, header=True)
             test_data.to_csv(self.data_ingestion_config.test_data_path, index=False, header=True)
             logging.info("Train and test data saved successfully.")
@@ -44,5 +43,11 @@ class DataIngestion:
             raise CustomException(e, sys)
 
 
-
+if __name__=="__main__":
+    di=DataIngestion()
+    train_path,test_path=di.initiate_data_ingestion()
+    print("Data Ingestion Successful.")
+    dv=DataValidation()
+    dv.initiate_data_validation(train_data_path=train_path,test_data_path=test_path)
+    print("Data Validation successful.")
 
