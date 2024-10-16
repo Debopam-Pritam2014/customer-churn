@@ -9,6 +9,7 @@ from sklearn.impute import SimpleImputer
 import pandas as pd
 import numpy as np
 from src.utils import save_object
+from imblearn.over_sampling import SMOTE
 
 @dataclass
 class DataTransformationConfig:
@@ -20,8 +21,8 @@ class DataTransformation:
 
     def _get_preprocessor_object(self):
         try:
-            numerical_columns=["CreditScore","Age","Tenure", "Balance","EstimatedSalary"]
-            categorical_columns=["Gender","Geography","NumOfProducts","HasCrCard","IsActiveMember"]
+            numerical_columns=["CreditScore","Age","IsActiveMember","Tenure"]
+            categorical_columns=["Gender","Geography","NumOfProducts"]
             numerical_transformer=Pipeline(
                 steps=[
                     ('imputer',SimpleImputer(strategy='mean')),
@@ -32,6 +33,7 @@ class DataTransformation:
                 steps=[
                     ('imputer',SimpleImputer(strategy='most_frequent')),
                     ('encoder',OneHotEncoder(sparse_output=False)),
+                    ('scaler',StandardScaler())
                 ]
             )
 
@@ -54,8 +56,8 @@ class DataTransformation:
         try:
             train_data=pd.read_csv(validated_train_data_path)
             test_data=pd.read_csv(validated_test_data_path)
-            train_data.drop(columns=['Surname'],inplace=True)
-            test_data.drop(columns=['Surname'],inplace=True)
+            train_data.drop(columns=['Surname','HasCrCard','EstimatedSalary','Balance'],inplace=True)
+            test_data.drop(columns=['Surname','HasCrCard','EstimatedSalary','Balance'],inplace=True)
             target_column="Exited"
             train_data[target_column]=train_data[target_column].astype("int")
             test_data[target_column]=test_data[target_column].astype("int")
@@ -65,6 +67,8 @@ class DataTransformation:
             y_test=test_data[target_column]
             preprocessor_obj=self._get_preprocessor_object()
             train_input_arr=preprocessor_obj.fit_transform(X_train)
+            smote=SMOTE()
+            train_input_arr_x,train_input_arr_y=smote.fit_resample(train_input_arr,y_train.values)
             test_input_arr=preprocessor_obj.transform(X_test)
 
             logging.info("Saving the preprocessor object")
@@ -72,7 +76,8 @@ class DataTransformation:
                         preprocessor_obj)
 
             return (
-                train_input_arr,y_train.values,test_input_arr,y_test.values
+                # train_input_arr,y_train.values,test_input_arr,y_test.values
+                train_input_arr_x,train_input_arr_y,test_input_arr,y_test.values
             )
         except Exception as e:
             raise CustomException(e,sys)
