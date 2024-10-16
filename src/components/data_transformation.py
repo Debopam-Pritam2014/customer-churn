@@ -20,8 +20,8 @@ class DataTransformation:
 
     def _get_preprocessor_object(self):
         try:
-            numerical_columns=["Age","Tenure","Usage Frequency", "Support Calls","Payment Delay","Total Spend","Last Interaction"]
-            categorical_columns=["Gender","Subscription Type","Contract Length"]
+            numerical_columns=["CreditScore","Age","Tenure", "Balance","EstimatedSalary"]
+            categorical_columns=["Gender","Geography","NumOfProducts","HasCrCard","IsActiveMember"]
             numerical_transformer=Pipeline(
                 steps=[
                     ('imputer',SimpleImputer(strategy='mean')),
@@ -54,7 +54,9 @@ class DataTransformation:
         try:
             train_data=pd.read_csv(validated_train_data_path)
             test_data=pd.read_csv(validated_test_data_path)
-            target_column="Churn"
+            train_data.drop(columns=['Surname'],inplace=True)
+            test_data.drop(columns=['Surname'],inplace=True)
+            target_column="Exited"
             train_data[target_column]=train_data[target_column].astype("int")
             test_data[target_column]=test_data[target_column].astype("int")
             X_train=train_data.drop(columns=[target_column],axis=1)
