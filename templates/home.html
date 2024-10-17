@@ -7,15 +7,15 @@
 </head>
 <body>
     <div class="login">
-        <h1>Telco Churn Prediction Using ML</h1>
+        <h1>Churn Prediction Using ML</h1>
 
         <form action="{{ url_for('predict_data')}}" method="post">
             <h1>
-                <legend>Churn Prediction</legend>
+                <legend>Bank Churn Prediction</legend>
             </h1>
             <div class="mb-3">
                 <label class="form-label">Age</label>
-                <input class="form-control" type="number" name="age" placeholder="Enter your Age" min='0' max='100' />
+                <input class="form-control" type="number" name="age" placeholder="Enter your Age" min='18' max='100' />
             </div>
             <div class="mb-3">
                 <label class="form-label">Gender</label>
@@ -31,63 +31,53 @@
             </div>
             <div class="mb-3">
                 <label class="form-label">Tenure</label>
-                <input class="form-control" type="number" name="tenure" placeholder="Enter Tenure" min='1' max='30.0' />
+                <input class="form-control" type="number" name="tenure" placeholder="Enter Tenure" min='1' max='10' />
             </div>
             <div class="mb-3">
-                <label class="form-label">Usage Frequency</label>
-                <input class="form-control" type="number" name="usage_frequency" placeholder="Usage Frequency" min='1' max='30.0' />
+                <label class="form-label">CreditScore</label>
+                <input class="form-control" type="number" name="CreditScore" placeholder="Enter CreditScore" min='300' max='850' />
             </div>
             <div class="mb-3">
-                <label class="form-label">Support Calls</label>
-                <input class="form-control" type="number" name="support_calls" placeholder="Support Calls" min='1' max='30.0' />
+                <label class="form-label">IsActiveMember</label>
+                <input class="form-control" type="number" name="IsActiveMember" placeholder="IsActiveMember" min='0' max='1' />
             </div>
-            <div class="mb-3">
-                <label class="form-label">Payment Delay</label>
-                <input class="form-control" type="number" name="payment_delay" placeholder="Payment Delay" min='1' max='30.0' />
-            </div>
+          
                 
             <div class="mb-3">
-                <label class="form-label">Subscription Type</label>
-                <select class="form-control" name="subscription_type" placeholder="Enter Subscription Type"
+                <label class="form-label">Geography</label>
+                <select class="form-control" name="Geography" placeholder="Enter Geography"
                     required>
-                    <option class="placeholder" selected disabled value="">Select Subscription Type</option>
-                    <option value="Basic">
-                        Basic
+                    <option class="placeholder" selected disabled value="">Select Geography</option>
+                    <option value="France">
+                        France
                     </option>
-                    <option value="Premium">
-                        Premium
+                    <option value="Spain">
+                        Spain
                     </option>
-                    <option value="Standard">
-                        Standard
-                    </option>
-                </select>
-            </div>
-            <div class="mb-3">
-                <label class="form-label">Contract Length</label>
-                <select class="form-control" name="contract_length" placeholder="Enter contract length" required>
-                    <option class="placeholder" selected disabled value="">Select Contract Length</option>
-                    <option value="Annual">
-                        Annual
-                    </option>
-                    <option value="Quarterly">
-                        Quarterly
-                    </option>
-                    <option value="Monthly">
-                        Monthly
+                    <option value="Germany">
+                        Germany
                     </option>
                 </select>
             </div>
+        <div class="mb-3">
+            <label class="form-label">NumOfProducts</label>
+            <select class="form-control" name="NumOfProducts" placeholder="Enter NumOfProducts" required>
+                <option class="placeholder" selected disabled value="">Select NumOfProducts</option>
+                <option value="One">
+                    One
+                </option>
+                <option value="Two">
+                    Two
+                </option>
+                <option value="Three">
+                    Three
+                </option>
+                <option value="Four">
+                    Four
+                </option>
+            </select>
+        </div>
 
-            <div class="mb-3">
-                <label class="form-label">Total Spend</label>
-                <input class="form-control" type="number" name="total_spend" placeholder="Enter total spend"
-                    min='90' max='1000' />
-            </div>
-            <div class="mb-3">
-                <label class="form-label">Last Interaction</label>
-                <input class="form-control" type="number" name="last_interaction" placeholder="Enter last interaction"
-                    min='0' max='30' />
-            </div>
             <div class="mb-3">
                 <input class="btn btn-primary" type="submit" value="Predict Churn" required />
             </div>

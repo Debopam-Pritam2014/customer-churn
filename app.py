@@ -24,13 +24,10 @@ def predict_data():
             Age=request.form.get("age"),
             Gender=request.form.get("gender"),
             Tenure=request.form.get("tenure"),
-            Usage_Frequency=request.form.get("usage_frequency"),
-            Support_Calls=request.form.get("support_calls"),
-            Payment_Delay=request.form.get("payment_delay"),
-            Subscription_Type=request.form.get("subscription_type"),
-            Contract_Length=request.form.get("contract_length"),
-            Total_Spend=request.form.get("total_spend"),
-            Last_Interaction=request.form.get("last_interaction"),
+            CreditScore=request.form.get("CreditScore"),
+            IsActiveMember=request.form.get("IsActiveMember"),
+            Geography=request.form.get("Geography"),
+            NumOfProducts=request.form.get("NumOfProducts"),
         )
         prediction=prediction_obj.predict()
         return render_template("home.html",results=prediction[0])

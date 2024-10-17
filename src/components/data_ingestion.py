@@ -9,6 +9,15 @@ from src.components.data_validation import DataValidation,DataValidationConfig
 from src.components.data_transformation import DataTransformation,DataTransformationConfig
 from src.components.model_trainer import ModelTrainer,ModelTrainerConfig
 
+def Numofproducts(n):
+    if n==1:
+        return 'One'
+    elif n==2:
+        return 'Two'
+    elif n==3 :
+        return 'Three'
+    else:
+        return 'Four'
 
 @dataclass
 class DataIngestionConfig:
@@ -32,6 +41,8 @@ class DataIngestion:
             logging.info("Saving train and test data to artifacts.")
             dataset.drop(columns=['RowNumber','CustomerId'],inplace=True)
             dataset.to_csv(self.data_ingestion_config.raw_data_path, index=False, header=True)
+            train_data['NumOfProducts']=train_data['NumOfProducts'].apply(Numofproducts)
+            test_data['NumOfProducts']=test_data['NumOfProducts'].apply(Numofproducts)
             train_data.to_csv(self.data_ingestion_config.train_data_path, index=False, header=True)
             test_data.to_csv(self.data_ingestion_config.test_data_path, index=False, header=True)
             logging.info("Train and test data saved successfully.")

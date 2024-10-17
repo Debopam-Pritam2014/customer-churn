@@ -27,7 +27,7 @@ class DataValidation:
                 "Age":pd.api.types.is_numeric_dtype,
                 "Tenure":pd.api.types.is_numeric_dtype,
                 "Balance":pd.api.types.is_numeric_dtype,
-                "NumOfProducts":pd.api.types.is_numeric_dtype,
+                "NumOfProducts":pd.api.types.is_object_dtype,
                 "HasCrCard":pd.api.types.is_numeric_dtype,
                 "IsActiveMember":pd.api.types.is_numeric_dtype,
                 "EstimatedSalary":pd.api.types.is_numeric_dtype,

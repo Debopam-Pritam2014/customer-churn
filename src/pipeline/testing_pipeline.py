@@ -8,20 +8,16 @@ import pandas as pd
 
 
 class PredictionPipeline:
-    def __init__(self,Age,Gender:str,Tenure,Usage_Frequency,
-                 Support_Calls,Payment_Delay,Subscription_Type,
-                 Contract_Length,Total_Spend,Last_Interaction) :
+    def __init__(self,Age,Gender:str,Tenure,CreditScore,
+                 IsActiveMember,Geography,NumOfProducts) :
         # all the custom values
         self.Age=Age
         self.Gender=Gender
         self.Tenure=Tenure
-        self.Usage_Frequency=Usage_Frequency
-        self.Support_Calls=Support_Calls
-        self.Payment_Delay=Payment_Delay
-        self.Subscription_Type=Subscription_Type
-        self.Contract_Length=Contract_Length
-        self.Total_Spend=Total_Spend
-        self.Last_Interaction=Last_Interaction
+        self.CreditScore=CreditScore
+        self.IsActiveMember=IsActiveMember
+        self.Geography=Geography
+        self.NumOfProducts=NumOfProducts
 
     def _get_dataframe(self):
         """
@@ -32,19 +28,17 @@ class PredictionPipeline:
                 "Age": [self.Age],
                 "Gender": [self.Gender],
                 "Tenure": [self.Tenure],
-                "Usage Frequency": [self.Usage_Frequency],
-                "Support Calls": [self.Support_Calls],
-                "Payment Delay": [self.Payment_Delay],
-                "Subscription Type": [self.Subscription_Type],
-                "Contract Length": [self.Contract_Length],
-                "Total Spend": [self.Total_Spend],
-                "Last Interaction": [self.Last_Interaction]
+                "CreditScore": [self.CreditScore],
+                "IsActiveMember": [self.IsActiveMember],
+                "Geography": [self.Geography],
+                "NumOfProducts": [self.NumOfProducts],
             }
             return pd.DataFrame(data_dict)
         except Exception as e:
             raise CustomException(e,sys)
     
     def predict(self):
+        logging.info("Predict method invoked.")
         """
         Makes predictions using the trained model.
         """
