@@ -131,7 +131,7 @@ ENV/
 env.bak/
 venv.bak/
 docs/
-mlflow_experiment.ipynb/
+/mlflow_experiment.ipynb
 
 
 # Spyder project settings

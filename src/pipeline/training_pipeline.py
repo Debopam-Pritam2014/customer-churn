@@ -30,10 +30,12 @@ class TrainingPipeline:
 
             print("Model Training Started...")
             trainer=ModelTrainer()
-            trainer.initiate_model_training(X_train=X_train,y_train=y_train,X_test=X_test,y_test=y_test)
+            best_model=trainer.initiate_model_training(X_train=X_train,y_train=y_train,X_test=X_test,y_test=y_test)
 
             logging.info("Training Pipeline Successfully Done.")
             print("Model Training Done.")
+            return best_model
+            
         except Exception as e:
             raise CustomException(e,sys)
 

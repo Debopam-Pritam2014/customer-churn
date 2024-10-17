@@ -44,6 +44,7 @@ class ModelTrainer:
                 self.model_config.model_trainer_config,
                 best_model
             )
+            return  best_model
 
         except Exception as e:
             raise CustomException(e,sys)
