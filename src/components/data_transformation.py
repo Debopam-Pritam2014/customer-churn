@@ -4,7 +4,7 @@ import os,sys
 from dataclasses import dataclass
 from sklearn.compose import ColumnTransformer
 from sklearn.pipeline import Pipeline
-from sklearn.preprocessing import StandardScaler,OneHotEncoder
+from sklearn.preprocessing import StandardScaler,OneHotEncoder,RobustScaler,MinMaxScaler
 from sklearn.impute import SimpleImputer
 import pandas as pd
 import numpy as np
@@ -26,14 +26,14 @@ class DataTransformation:
             numerical_transformer=Pipeline(
                 steps=[
                     ('imputer',SimpleImputer(strategy='mean')),
-                    ('scaler',StandardScaler()),
+                    ('scaler',RobustScaler()),
                 ]
             )
             categorical_transformer=Pipeline(
                 steps=[
                     ('imputer',SimpleImputer(strategy='most_frequent')),
                     ('encoder',OneHotEncoder(sparse_output=False)),
-                    ('scaler',StandardScaler())
+                    ('scaler',MinMaxScaler())
                 ]
             )
 
