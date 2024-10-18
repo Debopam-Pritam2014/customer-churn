@@ -9,7 +9,6 @@ This project is an end-to-end machine learning system for predicting bank custom
 - [Installation](#installation)
 - [Running the Application](#running-the-application)
 - [Usage](#usage)
-- [Project Structure](#project-structure)
 - [Model Evaluation](#model-evaluation)
 
 ## Project Overview
@@ -83,23 +82,6 @@ Once the application is running, you can access the following:
 - Prediction route: `http://127.0.0.1:5000/predict`
 
 You can use the `/predict` route to input features like `age`, `tenure`, `creditscore`, etc., and get back whether the customer is predicted to churn or not.
-
-## Project Structure
-├── app.py                # Flask application
-├── setup.py              # Setup file for the project
-├── requirements.txt      # Project dependencies
-├── artifacts/            # Folder for storing models, preprocessor, and data
-│   ├── model.pkl         # Trained model
-│   ├── preprocessor.pkl  # Data preprocessor
-│   ├── train.csv         # Training data
-│   └── test.csv          # Test data
-├── experiments/          # Jupyter notebooks for EDA and experiments
-├── src/ 
-│   ├── components/       # ingestion, validation transformation, etc.
-│   ├── pipeline/         # Pipeline training and prediction
-              
-└── README.md             # Project documentation
-└── main.py               # Testing training pipeline
 
 ## Model Evaluation
 The model was evaluated using various metrics:
